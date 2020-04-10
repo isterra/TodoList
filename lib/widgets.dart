@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 //========== APP BAR ===================//
 Widget bar(String title) {
   return ( AppBar(
@@ -19,8 +18,4 @@ Widget bar(String title) {
     ),
   ));
 }
-
-
-
-
 
