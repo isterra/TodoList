@@ -64,10 +64,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     _readData().then((data) {
       setState(() {
         _data = json.decode(data);
-        print("Iniciando");
         setLists();
-        print(_checked);
-        print(_noChecked);
       });
     });
     _controller = TabController(vsync: this, length: 2);
@@ -198,14 +195,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       ),
                                       onTap: () {
                                         setState(() {
-                                         /*Funcionando
-                                         _removedPositionFile=index;
-                                          _removedFile=Map.from(_noChecked[index]);
-                                          _positionRemovedInData=findInData(_noChecked[index]["title"]);
-                                          _removedInData=Map.from(_data[_positionRemovedInData]);
-                                          _noChecked.removeAt(index);
-                                          _data.removeAt(_positionRemovedInData);
-                                          _saveData();*/
                                           _positionRemovedInData=findInData(_noChecked[index]["title"]);
                                           _removedInData=Map.from(_data[_positionRemovedInData]);
                                           _data.removeAt(_positionRemovedInData);
@@ -239,16 +228,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                   _data[_positionRemovedInData]["value"]=true;
                                   _saveData();
                                   refreshList();
-                                  /*_noChecked[index]["value"] = true;
-                                  _checked.add(_noChecked[index]);
-                                  _positionRemovedInData=findInData(_noChecked[index]["title"]);
-                                  _noChecked.removeAt(index);
-                                  _data[_positionRemovedInData]["value"]=true;
-                                  _saveData();*/
-                                  print("dismissible");
-                                  print(_data);
-                                  print(_checked);
-                                  print(_noChecked);
                                 });
 
                               },
@@ -262,7 +241,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 )
               ],
             ),
-            //Segunda pagina aqui
             Padding(
               padding: EdgeInsets.all(10),
               child:  ListView.builder(
@@ -402,9 +380,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     child: Text('Salvar'),
                     onPressed: () {
                       opcaoSalvarAlert(opcao, index);
-                      print(_data);
-                      print(_checked);
-                      print(_noChecked);
                       _list.text = "";
                     },
                   ),
