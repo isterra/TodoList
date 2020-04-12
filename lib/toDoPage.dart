@@ -12,6 +12,7 @@ class SecondPage extends StatefulWidget {
 }
 
 class _SecondPageState extends State<SecondPage> {
+  GlobalKey<FormState> _form=GlobalKey<FormState>();
   // ignore: non_constant_identifier_names
   Map<String, dynamic> _Removed;
   // ignore: non_constant_identifier_names
@@ -44,12 +45,21 @@ class _SecondPageState extends State<SecondPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                    child: TextField(
+                    child: Form(
+                      key: _form,
+                      child: TextFormField(
                         controller: _toDo,
                         decoration: InputDecoration(
-                        labelText: "Novo To Do",
-                        labelStyle: TextStyle(color:Colors.blueAccent),
+                          labelText: "Novo To Do",
+                          labelStyle: TextStyle(color:Colors.blueAccent),
+                        ),
+                        validator: (value){
+                          if(value.isEmpty)
+                            return "Digite um To Do valido";
+                          return null;
+                        },
                       ),
+
                     )
                 ),
                 RaisedButton(
@@ -58,7 +68,10 @@ class _SecondPageState extends State<SecondPage> {
                       Icons.add
                   ),
                   shape: RoundedRectangleBorder(borderRadius:(BorderRadius.circular(50))),
-                  onPressed: _addNewList,
+                  onPressed: (){
+                    if(_form.currentState.validate())
+                      _addNewList();
+                  },
                 )
               ],
             ),

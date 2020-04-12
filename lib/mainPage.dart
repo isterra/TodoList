@@ -10,6 +10,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  GlobalKey<FormState> _form=GlobalKey<FormState>();
   TabController _controller;
   Container container;
   List _checked = [];
@@ -354,12 +355,20 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                TextField(
-                  controller: _list,
-                  decoration: InputDecoration(
-                      labelStyle: TextStyle(
-                    color: Colors.green,
-                  )),
+                Form(
+                  key: _form,
+                  child: TextFormField(
+                    controller: _list,
+                    decoration: InputDecoration(
+                        labelStyle: TextStyle(
+                          color: Colors.green,
+                        )),
+                    // ignore: missing_return
+                    validator: (value){
+                      if(value.isEmpty)
+                          return "Informe o nome da lista";
+                    },
+                  ),
                 )
               ],
             ),
@@ -379,8 +388,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   FlatButton(
                     child: Text('Salvar'),
                     onPressed: () {
-                      opcaoSalvarAlert(opcao, index);
-                      _list.text = "";
+                      if(_form.currentState.validate()) {
+                        opcaoSalvarAlert(opcao, index);
+                        _list.text = "";
+                      }
                     },
                   ),
                 ],
